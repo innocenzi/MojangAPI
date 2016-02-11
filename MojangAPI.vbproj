@@ -81,13 +81,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Miscellaneous\Methods.vb" />
-    <Compile Include="Parsers\AUTHENTICATE.vb" />
-    <Compile Include="Parsers\CHECK.vb" />
-    <Compile Include="Parsers\NAME_HISTORY_BY_UUID.vb" />
-    <Compile Include="Parsers\PLAYER_INFOS_BY_NAME.vb" />
-    <Compile Include="Parsers\PLAYER_PROFILE_BY_UUID.vb" />
-    <Compile Include="Parsers\UUID_BY_NAME.vb" />
-    <Compile Include="Parsers\UUID_BY_NAME_AT_TIME.vb" />
+    <Compile Include="Responses\AuthenticationResponse.vb" />
+    <Compile Include="Responses\CheckResponse.vb" />
+    <Compile Include="Responses\NameHistoryByUuidResponse.vb" />
+    <Compile Include="Responses\PlayerInfosByNameResponse.vb" />
+    <Compile Include="Responses\PlayerProfileByUuidResponse.vb" />
+    <Compile Include="Responses\UuidByNameResponse.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

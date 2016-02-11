@@ -53,6 +53,13 @@ Public Class Request
 
         Console.WriteLine(Me._RequestURL.ToString)
     End Sub
+    
+    ''' <summary>
+    ''' Execute the request. If this is a POST, you will NEED a header.
+    ''' </summary>
+    Public Function Execute() As String
+        Return Execute(Nothing)
+    End Function
 
     ''' <summary>
     ''' Execute the request. If this is a POST, you will NEED a header.
