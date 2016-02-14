@@ -39,6 +39,7 @@ Public Class Request
     ''' <param name="RequestParameters">The parameters of the specified link. See the choosen API.URl description.</param>
     ''' <exception cref="ArgumentOutOfRangeException">Will be thrown if RequestParameters misses arguments.</exception>
     Public Sub New(ByVal Type As Request.Method, ByVal RequestURL As String, ByVal ParamArray RequestParameters() As String)
+        Console.WriteLine("Creating new request of type " & Type.ToString & " at " & RequestURL.ToString)
         Me._Type = Type
 
         If RequestURL.Contains("{") Then ' Check if parameters are needed
@@ -66,6 +67,7 @@ Public Class Request
     ''' </summary>
     Public Function Execute(ByVal RequestHeader As String) As String
         Try
+            Console.WriteLine("Executing request of type " & Me.Type.ToString & " at " & Me.RequestURL.AbsoluteUri.ToString)
             Dim WebRequest As WebRequest = WebRequest.Create(Me.RequestURL)
             Dim RequestData As Byte() = Nothing
 
@@ -77,11 +79,12 @@ Public Class Request
 
                 Case Method.POST ' POST METHOD
                     WebRequest.Method = "POST"
+                    Console.WriteLine("Converting header to bytes...")
                     RequestData = Encoding.UTF8.GetBytes(RequestHeader)
                     WebRequest.ContentLength = RequestData.Length
 
-
                     ' Writing request
+                    Console.WriteLine("Writing on stream...")
                     Dim RequestStream As Stream = WebRequest.GetRequestStream()
                     Try
                         RequestStream.Write(RequestData, 0, RequestData.Length)
@@ -94,10 +97,12 @@ Public Class Request
             End Select
 
             ' Reading response
+            Console.WriteLine("Reading response...")
             Dim ResponseReader As New StreamReader(WebRequest.GetResponse.GetResponseStream())
             Dim RequestResult As String = (ResponseReader.ReadToEnd)
 
             ' Closing objects
+            Console.WriteLine("Clearing objects...")
             WebRequest = Nothing
             ResponseReader.Close()
             ResponseReader.Dispose()
@@ -109,8 +114,11 @@ Public Class Request
         Catch ConnexionFailed As WebException ' Erreur d'authentification
             Dim ResponseReader As New StreamReader(ConnexionFailed.Response.GetResponseStream())
             Dim RequestResult As String = (ResponseReader.ReadToEnd)
+            Console.WriteLine("The request returned an error : " & ConnexionFailed.Response.ToString)
             Return RequestResult
         Catch ex As Exception
+            Console.WriteLine("An unexpected error has occured")
+            Console.WriteLine(ex.ToString)
             Return ex.ToString
         End Try
 
@@ -173,11 +181,43 @@ Public Class URL
     ''' </summary>
     Public Shared ReadOnly PLAYER_PROFILE_BY_UUID As String = "https://sessionserver.mojang.com/session/minecraft/profile/{0}"
 
+
     ''' <summary>
-    ''' Method : POST ;
-    ''' Header : something like this : "{"agent": {"name": "Minecraft","version": 1},"username": " [id] ","password"": " [pass] "}"
+    ''' All required links for authentication and compagny.
     ''' </summary>
     ''' <remarks></remarks>
-    Public Shared ReadOnly AUTHENTICATE As String = "https://authserver.mojang.com/authenticate"
+    Public Class AUTHENTICATION
+
+        ''' <summary>
+        ''' Method : POST ;
+        ''' </summary>
+        ''' <remarks></remarks>
+        Public Shared ReadOnly SIGN_IN As String = "https://authserver.mojang.com/authenticate"
+
+        ''' <summary>
+        ''' Method : POST ;
+        ''' </summary>
+        ''' <remarks></remarks>
+        Public Shared ReadOnly REFRESH As String = "https://authserver.mojang.com/refresh"
+
+        ''' <summary>
+        ''' Method : POST ;
+        ''' </summary>
+        ''' <remarks></remarks>
+        Public Shared ReadOnly INVALIDATE As String = "https://authserver.mojang.com/invalidate"
+
+        ''' <summary>
+        ''' Method : POST ;
+        ''' </summary>
+        ''' <remarks></remarks>
+        Public Shared ReadOnly VALIDATE As String = "https://authserver.mojang.com/validate"
+
+        ''' <summary>
+        ''' Method : POST ;
+        ''' </summary>
+        ''' <remarks></remarks>
+        Public Shared ReadOnly SIGN_OUT As String = "https://authserver.mojang.com/signout"
+
+    End Class
 
 End Class

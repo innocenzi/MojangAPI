@@ -63,7 +63,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Headers\Headers.vb" />
+    <Compile Include="Headers\Header.vb" />
     <Compile Include="Others\MojangAPI.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
