@@ -13,7 +13,7 @@ The process is totally simplified, thanks to this API.
 
 ```vbnet
 Dim AuthRequest As New Request(Method.POST, URL.AUTHENTICATE)
-Dim RawResponse As String = MyRequest.Execute(Headers.Authenticate("Hawezo", "InnOcEnZi13068406"))
+Dim RawResponse As String = MyRequest.Execute(Headers.Authenticate("Hawezo", "[password]"))
 Dim AuthenticationResponse As New AuthenticationResponse(RawResponse)
 
 Console.WriteLine("PlayerName: " & AuthenticationResponse.GetResponse.PlayerName)
