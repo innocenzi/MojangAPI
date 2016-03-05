@@ -12,8 +12,8 @@ The process is totally simplified, thanks to this API.
 ### Usage
 
 ```vbnet
-Dim AuthRequest As New Request(Method.POST, URL.AUTHENTICATE)
-Dim RawResponse As String = MyRequest.Execute(Headers.Authenticate("Hawezo", "[password]"))
+Dim AuthRequest As New Request(Method.POST, URL.AUTHENTICATION.SIGN_IN)
+Dim RawResponse As String = AuthRequest.Execute(Headers.Authentication.Signin("Hawezo", "[password]"))
 Dim AuthenticationResponse As New AuthenticationResponse(RawResponse)
 
 Console.WriteLine("PlayerName: " & AuthenticationResponse.GetResponse.PlayerName)
