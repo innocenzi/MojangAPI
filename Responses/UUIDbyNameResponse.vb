@@ -4,6 +4,7 @@
         ' Specific
         Dim ID As String
         Dim Name As String
+        Dim Legacy As String
 
         ' Common
         Dim [Error] As String
@@ -37,11 +38,12 @@
         Me._RawResponse = RawResponse
 
         Try
-            Me._Response.ID = Methods.GetValue(RawResponse, "accessToken")
-            Me._Response.Name = Methods.GetValue(RawResponse, "clientToken")
+            Me._Response.ID = Methods.GetValue(RawResponse, "id")
+            Me._Response.Name = Methods.GetValue(RawResponse, "name")
+            Me._Response.Legacy = Methods.GetValue(RawResponse, "legacy")
 
-            Me._Response.Error = Methods.GetValue(RawResponse, "error")
-            Me._Response.ErrorMessage = Methods.GetValue(RawResponse, "errorMessage")
+            Me._Response.Error = Methods.GetValue(RawResponse, "id")
+            Me._Response.ErrorMessage = Methods.GetValue(RawResponse, "name")
         Catch ex As Exception
             Console.ForegroundColor = ConsoleColor.DarkRed
             Console.WriteLine(ex.ToString)
