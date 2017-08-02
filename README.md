@@ -1,4 +1,10 @@
-# MojangAPI
+# Before you go
+
+I wrote this a long time ago, and between now and this time, I improved myself enough to write a way better library. You can check out [MojangSharp](hawezo/MojangSharp) instead of losing time using this library.
+
+***
+
+# (Deprecated) MojangAPI
 
 MojangAPI is a class library created in VB.NET (usable in C# too) to facilitate the process of sending requests to Mojang's API.
 It is simple to uses.
